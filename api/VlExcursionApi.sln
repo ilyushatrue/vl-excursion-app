@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34330.188
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VlExcursionApi", "VlExcursionApi\VlExcursionApi.csproj", "{7F44EE17-4A96-4D08-B8E9-CC339633FD84}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAL", "DAL\DAL.csproj", "{887BDBC9-C8C4-4A89-AF0D-C7BE589E5540}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7F44EE17-4A96-4D08-B8E9-CC339633FD84}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F44EE17-4A96-4D08-B8E9-CC339633FD84}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F44EE17-4A96-4D08-B8E9-CC339633FD84}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F44EE17-4A96-4D08-B8E9-CC339633FD84}.Release|Any CPU.Build.0 = Release|Any CPU
+		{887BDBC9-C8C4-4A89-AF0D-C7BE589E5540}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{887BDBC9-C8C4-4A89-AF0D-C7BE589E5540}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{887BDBC9-C8C4-4A89-AF0D-C7BE589E5540}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{887BDBC9-C8C4-4A89-AF0D-C7BE589E5540}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E2DE2A9B-8775-4180-A058-2BBEFB630446}
+	EndGlobalSection
+EndGlobal

@@ -1,8 +1,9 @@
-﻿namespace DAL.Models;
+﻿using DAL.Models.Base;
 
-public class User
+namespace DAL.Models;
+
+public class User : BaseEntity
 {
-    public int Id { get; set; }
     public string Name { get; set; } = null!;
     public string? LastName { get; set; }
     public string? Email { get; set; }

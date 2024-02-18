@@ -7,31 +7,31 @@ namespace DAL.Repository;
 public class RepositoryManager(Context context) : IRepositoryManager
 {
 
-    public int InsertEntity<T>(T entity) where T : class, IBaseEntity
+    public async Task<int> InsertEntityAsync<T>(T entity) where T : class, IBaseEntity
     {
         context.Entry(entity).State = EntityState.Added;
-        context.SaveChanges();
+        await context.SaveChangesAsync();
         return entity.Id;
     }
 
-    public int InsertRange<T>(IEnumerable<T> entities) where T : class, IBaseEntity
+    public async Task<int> InsertRangeAsync<T>(IEnumerable<T> entities) where T : class, IBaseEntity
     {
         foreach (var entity in entities)
             context.Entry(entity).State = EntityState.Added;
-        return context.SaveChanges();
+        return await context.SaveChangesAsync();
     }
 
-    public bool DeleteEntity<T>(int id) where T : class, IBaseEntity, new()
+    public async Task<bool> DeleteEntityAsync<T>(int id) where T : class, IBaseEntity, new()
     {
         var dbSet = context.Set<T>();
         var entity = new T { Id = id };
         context.Attach(entity);
         dbSet.Remove(entity);
-        context.SaveChanges();
+        await context.SaveChangesAsync();
         return true;
     }
 
-    public int DeleteRange<T>(IEnumerable<int> ids) where T : class, IBaseEntity, new()
+    public async Task<int> DeleteRangeAsync<T>(IEnumerable<int> ids) where T : class, IBaseEntity, new()
     {
         var dbSet = context.Set<T>();
         foreach (var id in ids)
@@ -39,30 +39,31 @@ public class RepositoryManager(Context context) : IRepositoryManager
             var entity = new T { Id = id };
             context.Attach(entity);
             dbSet.Remove(entity);
-            context.SaveChanges();
+            await context.SaveChangesAsync();
         }
         return ids.Count();
     }
 
-    public IEnumerable<T> GetAllEntities<T>(Expression<Func<T, bool>> queryOptions) where T : class, IBaseEntity
+    public async Task<IEnumerable<T>> GetRangeAsync<T>(Expression<Func<T, bool>>? queryOptions = null) where T : class, IBaseEntity
     {
         var dbSet = context.Set<T>();
-        var query = dbSet.Where(queryOptions);
-        return query.ToList();
+        var query = dbSet.AsQueryable();
+        query = queryOptions != null ? dbSet.Where(queryOptions) : query;
+        return await query.ToListAsync();
     }
 
-    public T GetEntityById<T>(int id) where T : class, IBaseEntity
+    public async Task<T> GetEntityByIdAsync<T>(int id) where T : class, IBaseEntity
     {
         var dbSet = context.Set<T>();
-        var query = dbSet.Where(x => x.Id == id).FirstOrDefault() ?? throw new Exception("Error found");
+        var query = await dbSet.Where(x => x.Id == id).FirstOrDefaultAsync() ?? throw new Exception("Error found");
         return query;
     }
 
-    public bool UpdateEntity<T>(T entity, Expression<Func<T, object>>[] propertySelectors) where T : class, IBaseEntity
+    public async Task<bool> UpdateEntityAsync<T>(T entity, Expression<Func<T, object>>[]? propertySelectors = null) where T : class, IBaseEntity
     {
         context.Attach(entity);
 
-        if (propertySelectors.Length > 0)
+        if (propertySelectors?.Length > 0)
         {
             foreach (var selector in propertySelectors)
                 context.Entry(entity).Property(selector).IsModified = true;
@@ -72,15 +73,15 @@ public class RepositoryManager(Context context) : IRepositoryManager
             context.Entry(entity).State = EntityState.Modified;
         }
 
-        context.SaveChanges();
+        await context.SaveChangesAsync();
         return true;
     }
 
-    public int UpdateRange<T>(IEnumerable<T> entities) where T : class, IBaseEntity
+    public async Task<int> UpdateRangeAsync<T>(IEnumerable<T> entities) where T : class, IBaseEntity
     {
         context.AttachRange(entities);
         context.Entry(entities).State = EntityState.Modified;
-        var affectedRowsNum = context.SaveChanges();
+        var affectedRowsNum = await context.SaveChangesAsync();
         return affectedRowsNum;
     }
 }

@@ -5,12 +5,12 @@ namespace DAL.Repository;
 
 public interface IRepositoryManager
 {
-    IEnumerable<T> GetAllEntities<T>(Expression<Func<T, bool>> queryOptions) where T : class, IBaseEntity;
-    T GetEntityById<T>(int id) where T : class, IBaseEntity;
-    int UpdateRange<T>(IEnumerable<T> entities) where T : class, IBaseEntity;
-    bool UpdateEntity<T>(T entity, Expression<Func<T, object>>[] propertySelectors) where T : class, IBaseEntity;
-    int InsertEntity<T>(T entity) where T : class, IBaseEntity;
-    int InsertRange<T>(IEnumerable<T> entities) where T : class, IBaseEntity;
-    bool DeleteEntity<T>(int id) where T : class, IBaseEntity, new();
-    int DeleteRange<T>(IEnumerable<int> ids) where T : class, IBaseEntity, new();
+    Task<IEnumerable<T>> GetRangeAsync<T>(Expression<Func<T, bool>> queryOptions) where T : class, IBaseEntity;
+    Task<T> GetEntityByIdAsync<T>(int id) where T : class, IBaseEntity;
+    Task<int> UpdateRangeAsync<T>(IEnumerable<T> entities) where T : class, IBaseEntity;
+    Task<bool> UpdateEntityAsync<T>(T entity, Expression<Func<T, object>>[] propertySelectors) where T : class, IBaseEntity;
+    Task<int> InsertEntityAsync<T>(T entity) where T : class, IBaseEntity;
+    Task<int> InsertRangeAsync<T>(IEnumerable<T> entities) where T : class, IBaseEntity;
+    Task<bool> DeleteEntityAsync<T>(int id) where T : class, IBaseEntity, new();
+    Task<int> DeleteRangeAsync<T>(IEnumerable<int> ids) where T : class, IBaseEntity, new();
 }

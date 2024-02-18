@@ -11,8 +11,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace DAL.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20240217124138_User")]
-    partial class User
+    [Migration("20240218081927_Users")]
+    partial class Users
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -28,30 +28,36 @@ namespace DAL.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("id");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Email")
                         .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
+                        .HasColumnType("character varying(50)")
+                        .HasColumnName("email");
 
                     b.Property<string>("LastName")
                         .HasMaxLength(20)
-                        .HasColumnType("character varying(20)");
+                        .HasColumnType("character varying(20)")
+                        .HasColumnName("last_name");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(20)
-                        .HasColumnType("character varying(20)");
+                        .HasColumnType("character varying(20)")
+                        .HasColumnName("name");
 
                     b.Property<string>("Phone")
                         .HasMaxLength(11)
-                        .HasColumnType("character varying(11)");
+                        .HasColumnType("character varying(11)")
+                        .HasColumnName("phone");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .HasName("pk_users");
 
-                    b.ToTable("Users");
+                    b.ToTable("users", (string)null);
                 });
 #pragma warning restore 612, 618
         }

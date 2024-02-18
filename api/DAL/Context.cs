@@ -1,18 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
-using DAL.Configurations;
+﻿using DAL.Configurations;
 using DAL.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace DAL;
 
-public class Context : DbContext
+public class Context(DbContextOptions<Context> options) : DbContext(options)
 {
     public DbSet<User> Users { get; set; }
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        optionsBuilder
-            .UseNpgsql("Host=localhost; Database=excursionDb; Username=postgres; Password=qwer1234")
-            .UseSnakeCaseNamingConvention();
-    }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

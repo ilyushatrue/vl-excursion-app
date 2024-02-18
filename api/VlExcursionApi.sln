@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VlExcursionApi", "VlExcursi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAL", "DAL\DAL.csproj", "{887BDBC9-C8C4-4A89-AF0D-C7BE589E5540}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BL", "BL\BL.csproj", "{47048545-09D2-403D-BADF-73AD3A64DB65}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BL", "BL\BL.csproj", "{47048545-09D2-403D-BADF-73AD3A64DB65}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
